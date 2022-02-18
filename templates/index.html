@@ -1,0 +1,37 @@
+  {% extends 'layout.html' %}
+  {% block body %}
+      {% if not product_data %}
+        <div class="text-center m-5">
+          <img src="static/item-not-found-poster.jpg" class="img-responsive"/>
+        </div>
+      {% endif %}
+      {% if product_data %}
+          <div>
+            <table class="table">
+            <thead class="thead-light">
+                <tr>
+                <th scope="col" class="text-center">Product</th>
+                  <th scope="col" class="text-center">Price</th>
+                  <th scope="col" class="text-center">Quantity</th>
+                  <th scope="col" class="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for product in product_data %}
+                <tr>
+                  <th scope="row" class="text-center">{{ product.name }}</th>
+                  <td class="text-center">{{product.price}}</td>
+                  <td class="text-center">{{product.qty}}</td>
+                  <td class="text-center">
+                    <div>
+                      <a href="{% url 'Delete-Product' product.id %}" role="button" class="btn btn-danger w-25 m-2 p-2">Delete</a>
+                      <a href="{% url 'update' product.id %}" role="button" class="btn btn-warning m-2 w-25 p-2">Update</a>  
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+      {% endif %}
+  {% endblock body %}
